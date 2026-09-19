@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>நாலடியார் – ஒரு பாடல், ஒரு கதை</title>
+<meta name="description" content="நாலடியார் 400 பாடல்கள் — எளிய விளக்கம், சொல் பொருள், பாட்டியின் கதைகளுடன்.">
+<style>
+  :root {
+    --marigold: #F2A93B;
+    --kumkum: #BE3B2B;
+    --leaf: #3E7856;
+    --cream: #FBF3DF;
+    --indigo: #2A2140;
+    --ink: #2A2140;
+    --card-bg: #FFFFFF;
+    --border: rgba(42,33,64,0.12);
+    --nav-h: 64px;
+  }
+  [data-theme="dark"] {
+    --cream: #1B1626;
+    --card-bg: #241D33;
+    --ink: #F4EFE2;
+    --border: rgba(244,239,226,0.14);
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    font-family: "Noto Sans Tamil", "Catamaran", -apple-system, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    transition: background 0.3s, color 0.3s;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  @font-face {
+    font-family: "Noto Sans Tamil";
+    src: local("Noto Sans Tamil");
+  }
+  header {
+    padding: 16px 20px 12px;
+    text-align: center;
+    border-bottom: 3px solid var(--marigold);
+    background: linear-gradient(180deg, rgba(242,169,59,0.12), transparent);
+    flex-shrink: 0;
+  }
+  header h1 {
+    margin: 0 0 4px;
+    font-size: clamp(18px, 4.5vw, 26px);
+    color: var(--kumkum);
+    letter-spacing: 0.5px;
+  }
+  header p {
+    margin: 0;
+    font-size: 13px;
+    opacity: 0.75;
+  }
+  .toolbar {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px 16px;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+  }
+  .toolbar button {
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    color: var(--ink);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 12.5px;
+    cursor: pointer;
+  }
+  main {
+    flex: 1;
+    max-width: 720px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 4px 16px 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .adhikaram-title {
+    text-align: center;
+    margin: 6px 0 14px;
+    font-size: 16px;
+    color: var(--leaf);
+    flex-shrink: 0;
+  }
+  .adhikaram-hero {
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;
+    aspect-ratio: 21 / 9;
+    background:
+      linear-gradient(180deg, rgba(42,33,64,0.55), rgba(42,33,64,0.15) 40%, rgba(42,33,64,0.55)),
+      linear-gradient(135deg, var(--marigold), var(--kumkum));
+    display: flex;
+    align-items: flex-end;
+    box-shadow: 0 4px 18px rgba(42,33,64,0.15);
+    flex-shrink: 0;
+    margin-bottom: 10px;
+  }
+  .adhikaram-hero img {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;
+  }
+  .adhikaram-hero.no-image::after {
+    content: "படம் விரைவில்";
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 13px; text-align: center; padding: 14px;
+    background: rgba(42,33,64,0.35);
+  }
+  .adhikaram-hero-caption {
+    position: relative; z-index: 1; width: 100%; padding: 8px 14px;
+    color: #FBF3DF; font-size: 12px;
+    background: linear-gradient(180deg, transparent, rgba(42,33,64,0.7));
+  }
+
+  /* Single-padal view */
+  .home-hero {
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+    background:
+      linear-gradient(180deg, rgba(42,33,64,0.15), rgba(42,33,64,0.65)),
+      linear-gradient(135deg, #C99A4B, var(--indigo));
+    display: flex;
+    align-items: flex-end;
+    box-shadow: 0 4px 18px rgba(42,33,64,0.18);
+    flex-shrink: 0;
+    margin-bottom: 6px;
+  }
+  .home-hero img {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;
+  }
+  .home-hero.no-image::after {
+    content: "ஓலைச்சுவடி படம் விரைவில்";
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 13px; text-align: center; padding: 14px;
+    background: rgba(42,33,64,0.3);
+  }
+  .home-hero-text {
+    position: relative; z-index: 1; padding: 16px;
+    color: #FBF3DF;
+  }
+  .home-hero-text .tag {
+    font-size: 12px;
+    opacity: 0.9;
+    margin-bottom: 4px;
+  }
+  .home-hero-text .line {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .home-intro-text {
+    font-size: 13.5px;
+    line-height: 1.75;
+    text-align: center;
+    padding: 10px 4px 18px;
+    opacity: 0.9;
+  }
+  .paal-group { margin-bottom: 18px; }
+  .paal-heading {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--kumkum);
+    margin: 0 0 8px 2px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--border);
+  }
+  .toc-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 10px;
+    border-radius: 10px;
+    margin-bottom: 6px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+  }
+  .toc-item.unlocked { cursor: pointer; }
+  .toc-item.unlocked:hover { border-color: var(--leaf); }
+  .toc-num {
+    flex-shrink: 0;
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: var(--marigold);
+    color: var(--indigo);
+    font-size: 12px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .toc-item.locked .toc-num { background: var(--border); color: var(--ink); opacity: 0.6; }
+  .toc-title { flex: 1; font-size: 14px; }
+  .toc-status {
+    font-size: 11px;
+    flex-shrink: 0;
+    color: var(--leaf);
+    font-weight: 700;
+  }
+  .toc-item.locked .toc-status { opacity: 0.5; color: var(--ink); font-weight: 400; }
+  .view-hidden { display: none !important; }
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .padal-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-left: 5px solid var(--kumkum);
+    border-radius: 14px;
+    padding: 18px;
+    box-shadow: 0 2px 10px rgba(42,33,64,0.06);
+    overflow-y: auto;
+    flex: 1;
+  }
+  .padal-top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .padal-num {
+    display: inline-block;
+    background: var(--marigold);
+    color: var(--indigo);
+    font-weight: 700;
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 999px;
+  }
+  .padal-dots {
+    display: flex;
+    gap: 5px;
+  }
+  .padal-dots span {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--border);
+    cursor: pointer;
+  }
+  .padal-dots span.current { background: var(--kumkum); }
+  .moolam {
+    font-size: clamp(15px, 4.3vw, 19px);
+    line-height: 1.85;
+    white-space: nowrap;
+    overflow-x: auto;
+    margin: 6px 0 14px;
+  }
+  .moolam div { padding: 1px 0; }
+  .section-label {
+    font-size: 12px;
+    color: var(--leaf);
+    font-weight: 700;
+    margin: 12px 0 4px;
+  }
+  .eliya { font-size: 14.5px; line-height: 1.7; }
+  .sollporul-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+  .sollporul-chip {
+    font-size: 12px;
+    background: rgba(62,120,86,0.09);
+    border: 1px solid rgba(62,120,86,0.25);
+    border-radius: 8px;
+    padding: 5px 9px;
+  }
+  .sollporul-chip b { color: var(--leaf); }
+  .paati-block {
+    margin-top: 12px;
+    padding: 12px;
+    background: rgba(242,169,59,0.10);
+    border-radius: 10px;
+    border: 1px dashed rgba(242,169,59,0.5);
+  }
+  .paati-label { font-size: 12.5px; font-weight: 700; color: var(--kumkum); margin-bottom: 5px; }
+  .paati-text { font-size: 14px; line-height: 1.65; }
+  .audio-row { margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .audio-row button {
+    font-size: 12px; padding: 6px 12px; border-radius: 8px;
+    border: 1px solid var(--border); background: transparent; color: var(--ink); cursor: pointer;
+  }
+  .audio-row button.speaking {
+    background: var(--leaf); color: #fff; border-color: var(--leaf);
+  }
+  .audio-status { font-size: 11px; margin-top: 6px; opacity: 0.75; min-height: 14px; }
+
+  /* Bottom nav */
+  .bottom-nav {
+    flex-shrink: 0;
+    height: var(--nav-h);
+    border-top: 1px solid var(--border);
+    background: var(--card-bg);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 14px;
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
+  }
+  .nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border: none;
+    background: var(--leaf);
+    color: #fff;
+    font-size: 14px;
+    padding: 10px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    min-width: 96px;
+    justify-content: center;
+  }
+  .nav-btn:disabled {
+    background: var(--border);
+    color: var(--ink);
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  .nav-btn.prev { background: var(--kumkum); }
+  .nav-progress {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink);
+    opacity: 0.9;
+  }
+  .nav-progress input {
+    width: 46px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 5px 2px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: var(--cream);
+    color: var(--ink);
+  }
+  .nav-progress input::-webkit-outer-spin-button,
+  .nav-progress input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  .nav-progress .go-btn {
+    font-size: 11px;
+    padding: 5px 8px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    color: var(--ink);
+    cursor: pointer;
+  }
+  .source-note {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 8px 16px 0;
+    font-size: 11px;
+    opacity: 0.6;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  @media (max-width: 480px) {
+    .adhikaram-hero { border-radius: 0; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>நாலடியார் — ஒரு பாடல், ஒரு கதை</h1>
+  <p id="batch-subtitle"></p>
+</header>
+
+<div class="toolbar">
+  <button id="home-btn">🏠 முகப்பு</button>
+  <button id="theme-toggle">🌗 தீம்</button>
+  <button id="font-inc">அ+</button>
+  <button id="font-dec">அ−</button>
+</div>
+
+<main>
+  <div id="home-view">
+    <div class="home-hero no-image" id="home-hero">
+      <img id="home-hero-img" src="images/home-olaichuvadi.jpg" alt="ஓலைச்சுவடியும் எழுத்தாணியும்"
+           onerror="this.remove(); document.getElementById('home-hero').classList.add('no-image');"
+           onload="document.getElementById('home-hero').classList.remove('no-image');">
+      <div class="home-hero-text">
+        <div class="tag">சுமார் 2000 ஆண்டுகளுக்கு முன் எழுதப்பட்டது</div>
+        <div class="line">ஓலைச்சுவடியில், எழுத்தாணி முனையால் பொறிக்கப்பட்ட வரிகள் — இன்றும் நம்மிடம் பேசுகின்றன.</div>
+      </div>
+    </div>
+    <div class="home-intro-text">
+      நாலடியார் — சமண முனிவர்கள் இயற்றிய 400 பாடல்கள். ஒவ்வொரு அதிகாரமும் 10 பாடல்களைக் கொண்டது.
+      கீழே உள்ள அதிகாரங்களில் தட்டி, பாட்டியுடன் ஒவ்வொரு பாடலின் கதையையும் கேளுங்கள்.
+    </div>
+    <div id="toc-container"></div>
+  </div>
+
+  <div id="reading-view" class="view-hidden">
+    <div class="adhikaram-hero no-image" id="adhikaram-hero">
+      <img id="adhikaram-hero-img" src="images/adhikaram-03.jpg" alt=""
+           onerror="this.remove(); document.getElementById('adhikaram-hero').classList.add('no-image');"
+           onload="document.getElementById('adhikaram-hero').classList.remove('no-image');">
+      <div class="adhikaram-hero-caption" id="adhikaram-hero-caption"></div>
+    </div>
+
+    <div class="adhikaram-title" id="adhikaram-title"></div>
+
+    <div class="padal-view">
+      <div class="padal-card" id="padal-card"></div>
+    </div>
+  </div>
+</main>
+
+<div class="source-note" id="source-note"></div>
+
+<div class="bottom-nav">
+  <button class="nav-btn prev" id="btn-prev">⟵ முந்தையது</button>
+  <div class="nav-progress">
+    <span id="nav-count"></span>
+    <span>·</span>
+    <span>பாடல்</span>
+    <input type="number" id="jump-input" min="1" placeholder="எண்">
+    <button class="go-btn" id="jump-btn">செல்</button>
+  </div>
+  <button class="nav-btn next" id="btn-next">அடுத்தது ⟶</button>
+</div>
+
+<script>
+const BATCH_DATA = {
+  "meta": {
+    "source": "Project Madurai — நாலடியார் மூலமும் மகாதேவ முதலியார் அரும்பொருள் விளக்கமும் (1924), cross-verified against நாலடியார் நயவுரை (புலவர் சுந்தர சண்முகனார், 1970, Project Madurai e-text). Both public domain, free distribution.",
+    "batch": 3,
+    "adhikaram": {
+      "number": 3,
+      "tamil": "யாக்கை நிலையாமை",
+      "transliteration": "yaakkai nilaiyaamai",
+      "paal": "அறத்துப்பால்",
+      "iyal": "துறவறவியல்"
+    },
+    "padalRange": [
+      21,
+      30
+    ],
+    "note": "Moolam reproduced verbatim, line-for-line, from source. Simple explanation and Paati story premise are original content, not reproductions of traditional commentary."
+  },
+  "padalgal": [
+    {
+      "padalEnnum": 21,
+      "moolam": [
+        "மலைமிசைத் தோன்றும் மதியம் போல் யானைத்",
+        "தலைமிசைக் கொண்ட குடையர் - நிலமிசைத்",
+        "துஞ்சினார் என்றெடுத்துத் தூற்றப்பட்டாரல்லால்",
+        "எஞ்சினார் இவ்வுலகத் தில்."
+      ],
+      "sollPorul": [
+        {
+          "sol": "மதியம்",
+          "porul": "நிலா (சந்திரன்)"
+        },
+        {
+          "sol": "குடையர்",
+          "porul": "வெண்கொற்றக் குடையை உடையவர் (அரசர்)"
+        },
+        {
+          "sol": "துஞ்சினார்",
+          "porul": "இறந்தார் (மங்கல வழக்கு)"
+        },
+        {
+          "sol": "தூற்றப்பட்டார்",
+          "porul": "பேசப்பட்டார்"
+        },
+        {
+          "sol": "எஞ்சினார்",
+          "porul": "மிச்சமானவர் (இறவாமல் தப்பியவர்)"
+        }
+      ],
+      "eliyaViakkam": "மலைமேல் தோன்றும் நிலவைப் போல, யானையின் பிடர்மேல் வெண்கொற்றக் குடையுடன் அமர்ந்து சென்ற அரசர்களும் இறுதியில் மண்ணில் மறைந்தனர் என்று பேசப்படுகிறார்களே தவிர, இவ்வுலகில் இறவாமல் தப்பியவர் யாருமில்லை.",
+      "paatiKathaiKaru": "ஒரு காலத்தில் பெரும் அரசாட்சி செய்த மன்னன் ஒருவனைப் பற்றி பாட்டி சொல்கிறார் — இன்று அவனுடைய பெயர் வரலாற்றுப் புத்தகத்தில் மட்டுமே மிச்சம். 'எவ்வளவு பெரிய அரசராக இருந்தாலும், மரணம் அனைவருக்கும் பொதுவானது' என்பதை குழந்தைகளுக்கு மென்மையாக உணர்த்துகிறார்."
+    },
+    {
+      "padalEnnum": 22,
+      "moolam": [
+        "வாழ்நாட் கலகா வயங்கொளி மண்டிலம்",
+        "வீழ்நாள் படாஆ தெழுதலால் - வாழ்நாள்",
+        "உலவாமுன் ஒப்புர வாற்றுமின் யாரும்",
+        "நிலவார் நிலமிசை மேல்."
+      ],
+      "sollPorul": [
+        {
+          "sol": "வயங்கொளி மண்டிலம்",
+          "porul": "ஒளிவீசும் சூரிய மண்டலம்"
+        },
+        {
+          "sol": "வீழ்நாள் படாஆது",
+          "porul": "தவறாத நாளும் இன்றி"
+        },
+        {
+          "sol": "ஒப்புரவு",
+          "porul": "உலகோடு ஒத்த உதவி"
+        },
+        {
+          "sol": "நிலவார்",
+          "porul": "நிலைத்திருக்க மாட்டார்"
+        }
+      ],
+      "eliyaViakkam": "ஒளிவீசும் சூரியன் ஒரு நாள்கூடத் தவறாமல் உதயமாகி, வாழ்நாளை அளந்துகொண்டே இருப்பதால், வாழ்நாள் முடிவதற்குள் உலகுக்கு உதவி செய்யுங்கள் — இந்த மண்ணின் மேல் என்றும் நிலைத்திருப்பவர் யாருமில்லை.",
+      "paatiKathaiKaru": "ஒவ்வொரு நாளும் உதிக்கும் சூரியனைக் காட்டி, 'இது ஒரு நாளை எடுத்துச் செல்கிறது' என்று பாட்டி சொல்வதை குழந்தைகள் ஏற்கனவே கேட்டிருக்கிறார்கள் (பாடல் 7-ல்) — இப்போது அதே கருத்தை, 'வாழும் காலத்திலேயே பிறருக்கு உதவு' என்ற புதிய கோணத்தில் விளக்குகிறார்."
+    },
+    {
+      "padalEnnum": 23,
+      "moolam": [
+        "மன்றம் கறங்க மணப்பறை யாயின",
+        "அன்றவர்க் காங்கே பிணப்பறையாய்ப் - பின்றை",
+        "ஒலித்தலும் உண்டாமென் றுய்ந்துபோ மாறே",
+        "வலிக்குமாம் மாண்டார் மனம்."
+      ],
+      "sollPorul": [
+        {
+          "sol": "மன்றம் கறங்க",
+          "porul": "மண அரங்கு அதிரும்படி"
+        },
+        {
+          "sol": "மணப்பறை",
+          "porul": "திருமண இசைக்கருவி"
+        },
+        {
+          "sol": "பிணப்பறை",
+          "porul": "சாவுக்கு அடிக்கும் பறை"
+        },
+        {
+          "sol": "மாண்டார்",
+          "porul": "மாட்சிமையுடைய பெரியோர்"
+        }
+      ],
+      "eliyaViakkam": "மண அரங்கு அதிரும்படி ஒலித்த அதே மணப்பறை, அந்த வீட்டிலேயே பின்னொரு நாள் பிணப்பறையாக ஒலிக்கும் என்பதை உணர்ந்து, ஈடேறும் நல்வழியையே பெரியோர் மனம் உறுதியாகப் பற்றிக்கொள்ளும்.",
+      "paatiKathaiKaru": "ஒரு திருமண மண்டபத்தில் மகிழ்ச்சியுடன் இசை முழங்குவதைக் கேட்ட குழந்தைகளிடம், பாட்டி 'இந்த வாழ்க்கை இப்படி மகிழ்ச்சியும் துயரமும் மாறிமாறி வருவது — அதனால் எப்போதும் நல்வழியில் நடக்க வேண்டும்' என்கிறார்."
+    },
+    {
+      "padalEnnum": 24,
+      "moolam": [
+        "சென்றே யெறிப ஒருகால் ; சிறுவரை",
+        "நின்றே யெறிப் பறையினை ;- நன்றேகாண்!",
+        "முக்காலைக் கொட்டினுள் மூடித்தீக்கொண்டெழுவர்",
+        "செத்தாரைச் சாவார் சுமந்து."
+      ],
+      "sollPorul": [
+        {
+          "sol": "சிறுவரை",
+          "porul": "சிறிது நேரம்"
+        },
+        {
+          "sol": "முக்காலை",
+          "porul": "மூன்றாவது முறை"
+        },
+        {
+          "sol": "செத்தாரை",
+          "porul": "இறந்தவரை"
+        }
+      ],
+      "eliyaViakkam": "சாப்பறை அடிப்பவர் முதலில் ஒரு முறை, பின் சிறிது நேரம் நின்று இரண்டாம் முறை, மூன்றாம் முறை அடிக்கும்போது பிணத்தை மூடி நெருப்புடன் எடுத்துச் செல்வர் — இப்படி, செத்தவரை உயிருடன் இருப்பவரே சுமந்து செல்கிறார்கள். இதை ஆராய்ந்து பார்க்க வேண்டும்.",
+      "paatiKathaiKaru": "பாட்டி இந்தப் பாடலை கொஞ்சம் நிதானமாக விளக்குகிறார் — வாழ்க்கையின் இயல்பான ஒரு பகுதியாக மரணத்தை பயமின்றி புரிந்துகொள்ள வேண்டும் என்பதே கருத்து, குழந்தைகளுக்கு பயமுறுத்தும் வகையில் அல்ல."
+    },
+    {
+      "padalEnnum": 25,
+      "moolam": [
+        "கணங்கொண்டு சுற்றத்தார் கல்லென் றலறப்",
+        "பிணங்கொண்டு காட்டுய்ப்பார்க் கண்டும் - மணங்கொண்டீண்டு",
+        "உண்டுண்டுண் டென்னும் உணர்வினாற் சாற்றுமே",
+        "டொண்டொண்டொண் என்னும் பறை."
+      ],
+      "sollPorul": [
+        {
+          "sol": "கணங்கொண்டு",
+          "porul": "கூட்டமாய்க் கூடி"
+        },
+        {
+          "sol": "காட்டுய்ப்பார்",
+          "porul": "சுடுகாட்டுக்கு அனுப்புபவர்"
+        },
+        {
+          "sol": "மணங்கொண்டு",
+          "porul": "மணம் புரிந்துகொண்டு"
+        }
+      ],
+      "eliyaViakkam": "உறவினர் கூட்டமாய்க் கூடி அழுது, பிணத்தை சுடுகாட்டுக்கு அனுப்புவதைக் கண்டும், இவ்வுலகில் மணம் புரிந்து 'இன்பம் உண்டு உண்டு உண்டு' என்று மயங்கும் நினைவுடையவர்க்கு, சாப்பறையே 'இன்பம் நிலையாது' என்று ஒலித்து உணர்த்தும்.",
+      "paatiKathaiKaru": "இந்தப் பாடலின் ஒலிக்குறிப்பு (டொண் டொண் டொண்) குழந்தைகளுக்குப் பிடிக்கும் என்பதால், பாட்டி அதைச் சொல்லி காட்டி, பறையின் ஒலி ஒரு 'நினைவூட்டல்' போல செயல்படுவதாக விளையாட்டுத்தனமாக விளக்குகிறார்."
+    },
+    {
+      "padalEnnum": 26,
+      "moolam": [
+        "நார்த்தொடுத் தீர்க்கிலென் நன்றாய்ந் தடக்கிலென்",
+        "பார்த்துழிப் பெய்யிலென பல்லோர் பழிக்கிலென்",
+        "தோற்பையுள் நின்று தொழிலறச் செய்தூட்டும்",
+        "கூத்தன் புறப்பட்டக் கால்."
+      ],
+      "sollPorul": [
+        {
+          "sol": "தோற்பையுள்",
+          "porul": "தோல் பையாகிய உடலுக்குள்"
+        },
+        {
+          "sol": "கூத்தன்",
+          "porul": "உயிர் (கூத்தாடுபவனாக உருவகிக்கப்பட்டது)"
+        }
+      ],
+      "eliyaViakkam": "தோலாகிய பையுள் இருந்து பணிபுரிந்து உணவூட்டிய உயிராகிய கூத்தாடி உடலைவிட்டுப் புறப்பட்டுவிட்டால், அந்த வெற்று உடலை கயிற்றால் இழுத்தாலும், நன்கு அடக்கம் செய்தாலும், எங்கு எறிந்தாலும், பலர் பழித்தாலும் — அதற்கு ஒன்றும் இல்லை.",
+      "paatiKathaiKaru": "ஒரு பொம்மலாட்டக் கூத்தாடியை உதாரணமாகக் காட்டி, 'கயிறு இழுப்பவன் இல்லாமல் பொம்மை தானாக ஆடாது, அதுபோலவே உயிர் இல்லாத உடல் ஒன்றும் செய்யாது' என பாட்டி எளிமையாக விளக்குகிறார்."
+    },
+    {
+      "padalEnnum": 27,
+      "moolam": [
+        "படுமழை மொக்குளிற் பல்காலுந் தோன்றிக்",
+        "கெடுமிதோர் யாக்கையென் றெண்ணித் - தடுமாற்றம்",
+        "தீர்ப்பேம்யாம் என்றுணருந் திண்ணறி வாளரை",
+        "நேர்ப்பார்யார் நீணிலத்தின் மேல்."
+      ],
+      "sollPorul": [
+        {
+          "sol": "படுமழை மொக்குள்",
+          "porul": "பெய்யும் மழையில் எழும் குமிழி"
+        },
+        {
+          "sol": "தடுமாற்றம்",
+          "porul": "பிறவித் தடுமாற்றம் (சுழற்சி)"
+        },
+        {
+          "sol": "திண்ணறிவாளர்",
+          "porul": "உறுதியான அறிவுடையோர்"
+        }
+      ],
+      "eliyaViakkam": "பெய்யும் மழையில் எழும் நீர்க்குமிழி போல, பலமுறை தோன்றி அழியக்கூடியதே இந்த உடல் என்று எண்ணி, 'இந்த சுழற்சியை நீக்குவோம்' என்று உணர்ந்து செயல்படும் உறுதியான அறிஞரை ஒப்பவர் இவ்வுலகில் யார் உளர்?",
+      "paatiKathaiKaru": "மழை பெய்யும் நாளில், தண்ணீரில் குமிழிகள் எழுந்து உடனே மறைவதைக் காட்டி, 'நம் உடலும் இப்படித்தான் — அதனால் நிலையான நல்ல செயல்களில் கவனம் செலுத்த வேண்டும்' என பாட்டி இயற்கையிலிருந்தே பாடம் கற்பிக்கிறார்."
+    },
+    {
+      "padalEnnum": 28,
+      "moolam": [
+        "யாக்கையை யாப்புடைத்தாப் பெற்றவர் தாம்பெற்ற",
+        "யாக்கையால் ஆய பயன்கொள்க - யாக்கை",
+        "மலையாடு மஞ்சுபோல் தோன்றிமற் றாங்கே",
+        "நிலையாது நீத்து விடும்."
+      ],
+      "sollPorul": [
+        {
+          "sol": "யாப்புடைத்தாப்",
+          "porul": "கட்டமைப்புடையதாக"
+        },
+        {
+          "sol": "மலையாடு மஞ்சு",
+          "porul": "மலைமேல் அசையும் மேகம்"
+        }
+      ],
+      "eliyaViakkam": "உடலைக் கட்டமைப்புடையதாகப் பெற்றவர், அதன் பயனை நன்கு பெற்றுக்கொள்ள வேண்டும் — ஏனெனில் உடல் மலைமேல் அசையும் மேகம் போல தோன்றி, அங்கேயே நிலையின்றி நீங்கிவிடும்.",
+      "paatiKathaiKaru": "மலைமேல் மெதுவாக நகரும் மேகங்களைப் பார்த்துக்கொண்டிருக்கும் குழந்தைகளிடம், 'அந்த மேகம் கொஞ்ச நேரத்தில் மறைந்துவிடும், நம் உடலும் அப்படித்தான் — இருக்கும்போதே நல்லது செய்' என பாட்டி சொல்கிறார்."
+    },
+    {
+      "padalEnnum": 29,
+      "moolam": [
+        "புன்னுனிமேல் நீர்போல் நிலையாமை என்றெண்ணி",
+        "இன்னினியே செய்க அறவினை - இன்னினியே",
+        "நின்றான்; இருந்தான்; கிடந்தான்; தன் கேளலறச்",
+        "சென்றான்' எனப்படுத லால்."
+      ],
+      "sollPorul": [
+        {
+          "sol": "புன்னுனிமேல் நீர்",
+          "porul": "புல்நுனியில் உள்ள பனித்துளி"
+        },
+        {
+          "sol": "கேள்",
+          "porul": "உறவினர்"
+        }
+      ],
+      "eliyaViakkam": "புல்நுனியில் உள்ள பனித்துளி போல நிலையற்றது வாழ்க்கை என்று எண்ணி, நல்வினையை இப்போதே செய்யுங்கள் — ஏனெனில் 'இப்போதுதான் நின்றான்; அமர்ந்தான்; படுத்தான்; பின் உறவினர் அலற இறந்தான்' என்றே வாழ்க்கை பேசப்படுகிறது.",
+      "paatiKathaiKaru": "காலையில் புல்லின் நுனியில் இருக்கும் பனித்துளி, சூரியன் உதயமானதும் காணாமல் போவதைக் காட்டி, 'அதுபோலத்தான் நேரமும் கழிகிறது — இப்போதே நல்லது செய்' என பாட்டி நினைவூட்டுகிறார்."
+    },
+    {
+      "padalEnnum": 30,
+      "moolam": [
+        "கேளாதே வந்து கிளைகளாய் இல்தோன்றி",
+        "வாளாதே போவரான் மாந்தர்கள் - வாளாதே",
+        "சேக்கை மரனொழியச் சேணீங்கு புட்போல",
+        "யாக்கை தமர்க்கொழிய நீத்து."
+      ],
+      "sollPorul": [
+        {
+          "sol": "கிளைகளாய்",
+          "porul": "உறவினராய்"
+        },
+        {
+          "sol": "சேக்கை மரன்",
+          "porul": "தங்குமிடமான மரம்"
+        },
+        {
+          "sol": "சேணீங்கு புள்",
+          "porul": "தொலைவு நீங்கிச் செல்லும் பறவை"
+        }
+      ],
+      "eliyaViakkam": "கேட்காமலேயே உறவினராய் வீட்டில் தோன்றி, ஒன்றும் சொல்லாமலேயே மனிதர்கள் சென்றுவிடுகிறார்கள் — தங்கியிருந்த மரத்தை விட்டு தொலைவு பறந்துசெல்லும் பறவை போல, உடலைச் சுற்றத்தாருக்கு விட்டுவிட்டு உயிர் நீங்கிச் செல்கிறது.",
+      "paatiKathaiKaru": "மரத்தில் கூடு கட்டிய பறவை ஒருநாள் பறந்துவிடுவதைக் காட்டி, 'பறவை கூட்டை விட்டுச் செல்வது போலவே, ஒரு நாள் நாமும் நம் உடலை விட்டுச் செல்வோம் — அதனால் இருக்கும்போதே அன்புடன் வாழ வேண்டும்' என பாட்டி அதிகாரத்தை நிறைவு செய்கிறார்."
+    }
+  ]
+};
+
+// Full 40-adhikaram table of contents. "verified" = cross-checked against
+// Project Madurai + a second independent source. Chapters not yet built
+// show as locked ("விரைவில்") regardless of verification status.
+const TOC = [
+  { num: 1, tamil: "செல்வ நிலையாமை", paal: "அறத்துப்பால் (துறவறவியல்)", verified: true },
+  { num: 2, tamil: "இளமை நிலையாமை", paal: "அறத்துப்பால் (துறவறவியல்)", verified: true },
+  { num: 3, tamil: "யாக்கை நிலையாமை", paal: "அறத்துப்பால் (துறவறவியல்)", verified: true },
+  { num: 4, tamil: "அறன் வலியுறுத்தல்", paal: "அறத்துப்பால் (துறவறவியல்)", verified: true },
+  { num: 5, tamil: "தூய்தன்மை", paal: "அறத்துப்பால் (துறவறவியல்)", verified: true },
+  { num: 6, tamil: "துறவு", paal: "அறத்துப்பால் (துறவறவியல்)", verified: true },
+  { num: 7, tamil: "சினமின்மை", paal: "அறத்துப்பால் (துறவறவியல்)", verified: true },
+  { num: 8, tamil: "பொறையுடைமை", paal: "அறத்துப்பால் (துறவறவியல்)", verified: true },
+  { num: 9, tamil: "பிறர்மனை நயவாமை", paal: "அறத்துப்பால் (துறவறவியல்)", verified: true },
+  { num: 10, tamil: "ஈகை", paal: "அறத்துப்பால் (துறவறவியல்)", verified: true },
+  { num: 11, tamil: "பழவினை", paal: "அறத்துப்பால் (துறவறவியல்)", verified: true },
+  { num: 12, tamil: "மெய்ம்மை", paal: "அறத்துப்பால் (துறவறவியல்)", verified: true },
+  { num: 13, tamil: "தீவினையச்சம்", paal: "அறத்துப்பால் (துறவறவியல்)", verified: true },
+  { num: 14, tamil: "கல்வி", paal: "பொருட்பால்", verified: true },
+  { num: 15, tamil: "குடிப்பிறப்பு", paal: "பொருட்பால்", verified: true },
+  { num: 16, tamil: "மேன்மக்கள்", paal: "பொருட்பால்", verified: true },
+  { num: 17, tamil: "பெரியாரைப் பிழையாமை", paal: "பொருட்பால்", verified: true },
+  { num: 18, tamil: "நல்லினஞ் சேர்தல்", paal: "பொருட்பால்", verified: true },
+  { num: 19, tamil: "பெருமை", paal: "பொருட்பால்", verified: true },
+  { num: 20, tamil: "தாளாண்மை", paal: "பொருட்பால்", verified: true },
+  { num: 21, tamil: "சுற்றந்தழால்", paal: "பொருட்பால்", verified: true },
+  { num: 22, tamil: "நட்பாராய்தல்", paal: "பொருட்பால்", verified: true },
+  { num: 23, tamil: "நட்பிற் பிழைபொறுத்தல்", paal: "பொருட்பால்", verified: true },
+  { num: 24, tamil: "கூடா நட்பு", paal: "பொருட்பால்", verified: true },
+  { num: 25, tamil: "அறிவுடைமை", paal: "பொருட்பால்", verified: false },
+  { num: 26, tamil: "அறிவின்மை", paal: "பொருட்பால்", verified: false },
+  { num: 27, tamil: "நயமிலி செல்வம்", paal: "பொருட்பால்", verified: false },
+  { num: 28, tamil: "ஈயாமை", paal: "பொருட்பால்", verified: false },
+  { num: 29, tamil: "இன்மை", paal: "பொருட்பால்", verified: false },
+  { num: 30, tamil: "மானம்", paal: "பொருட்பால்", verified: false },
+  { num: 31, tamil: "இரவச்சம்", paal: "பொருட்பால்", verified: false },
+  { num: 32, tamil: "அவையறிதல்", paal: "பொருட்பால்", verified: false },
+  { num: 33, tamil: "புல்லறிவாண்மை", paal: "பொருட்பால்", verified: false },
+  { num: 34, tamil: "பேதைமை", paal: "பொருட்பால்", verified: false },
+  { num: 35, tamil: "கீழ்மை", paal: "பொருட்பால்", verified: false },
+  { num: 36, tamil: "கயமை", paal: "பொருட்பால்", verified: false },
+  { num: 37, tamil: "பன்னெறி", paal: "பொருட்பால்", verified: true },
+  { num: 38, tamil: "பொதுமகளிர்", paal: "பொருட்பால்", verified: false },
+  { num: 39, tamil: "கற்புடை மகளிர்", paal: "பொருட்பால்", verified: false },
+  { num: 40, tamil: "காமத்தின் தன்மை", paal: "காமத்துப்பால்", verified: false },
+];
+
+// Which adhikarams have their padalgal actually built into this file.
+const BUILT_ADHIKARAMS = new Set(BATCH_DATA.padalgal.length ? [BATCH_DATA.meta.adhikaram.number] : []);
+
+function renderTOC() {
+  const container = document.getElementById('toc-container');
+  container.innerHTML = '';
+
+  const groups = {};
+  TOC.forEach(item => {
+    if (!groups[item.paal]) groups[item.paal] = [];
+    groups[item.paal].push(item);
+  });
+
+  Object.keys(groups).forEach(paalName => {
+    const groupDiv = document.createElement('div');
+    groupDiv.className = 'paal-group';
+    const heading = document.createElement('div');
+    heading.className = 'paal-heading';
+    heading.textContent = paalName;
+    groupDiv.appendChild(heading);
+
+    groups[paalName].forEach(item => {
+      const unlocked = BUILT_ADHIKARAMS.has(item.num);
+      const row = document.createElement('div');
+      row.className = 'toc-item ' + (unlocked ? 'unlocked' : 'locked');
+      row.innerHTML = `
+        <div class="toc-num">${item.num}</div>
+        <div class="toc-title">${item.tamil}</div>
+        <div class="toc-status">${unlocked ? 'படிக்க ⟶' : 'விரைவில்'}</div>
+      `;
+      if (unlocked) {
+        row.addEventListener('click', () => {
+          showReadingView();
+          renderPadal(0);
+        });
+      }
+      groupDiv.appendChild(row);
+    });
+    container.appendChild(groupDiv);
+  });
+}
+
+function showHomeView() {
+  document.getElementById('home-view').classList.remove('view-hidden');
+  document.getElementById('reading-view').classList.add('view-hidden');
+}
+function showReadingView() {
+  document.getElementById('home-view').classList.add('view-hidden');
+  document.getElementById('reading-view').classList.remove('view-hidden');
+}
+document.getElementById('home-btn').addEventListener('click', showHomeView);
+
+let currentIndex = 0;
+
+function renderHeaderAndHero() {
+  const meta = BATCH_DATA.meta;
+  document.getElementById('batch-subtitle').textContent =
+    `பாட்டி சொல்லும் நாலடியார் கதைகள் · அதிகாரம் ${meta.adhikaram.number}`;
+  document.getElementById('adhikaram-title').textContent =
+    `அதிகாரம் ${meta.adhikaram.number}: ${meta.adhikaram.tamil} (பாடல் ${meta.padalRange[0]}–${meta.padalRange[1]})`;
+  document.getElementById('source-note').textContent = meta.source;
+
+  const hero = document.getElementById('adhikaram-hero');
+  const heroImg = document.getElementById('adhikaram-hero-img');
+  const heroCaption = document.getElementById('adhikaram-hero-caption');
+  hero.setAttribute('data-adhikaram-name', `அதிகாரம் ${meta.adhikaram.number}: ${meta.adhikaram.tamil}`);
+  if (heroImg) heroImg.alt = `அதிகாரம் ${meta.adhikaram.number} — ${meta.adhikaram.tamil} விளக்கப்படம்`;
+  heroCaption.textContent = `அதிகாரம் ${meta.adhikaram.number}: ${meta.adhikaram.tamil}`;
+}
+
+function renderPadal(index) {
+  stopSpeaking();
+  const total = BATCH_DATA.padalgal.length;
+  currentIndex = Math.max(0, Math.min(index, total - 1));
+  const p = BATCH_DATA.padalgal[currentIndex];
+
+  const moolamHtml = p.moolam.map(line => `<div>${line}</div>`).join('');
+  const sollPorulHtml = p.sollPorul.map(sp =>
+    `<span class="sollporul-chip"><b>${sp.sol}</b> — ${sp.porul}</span>`
+  ).join('');
+
+  const dotsHtml = BATCH_DATA.padalgal.map((_, i) =>
+    `<span class="${i === currentIndex ? 'current' : ''}" data-idx="${i}"></span>`
+  ).join('');
+
+  document.getElementById('padal-card').innerHTML = `
+    <div class="padal-top-row">
+      <span class="padal-num">பாடல் ${p.padalEnnum}</span>
+      <div class="padal-dots">${dotsHtml}</div>
+    </div>
+    <div class="moolam">${moolamHtml}</div>
+
+    <div class="section-label">சொல் பொருள்</div>
+    <div class="sollporul-list">${sollPorulHtml}</div>
+
+    <div class="section-label">எளிய விளக்கம்</div>
+    <div class="eliya">${p.eliyaViakkam}</div>
+
+    <div class="paati-block">
+      <div class="paati-label">👵 பாட்டி சொல்லும் கதை</div>
+      <div class="paati-text">${p.paatiKathaiKaru}</div>
+    </div>
+
+    <div class="audio-row">
+      <button id="audio-moolam-btn" onclick="speakText(BATCH_DATA.padalgal[currentIndex].moolam.join(' '), 'audio-moolam-btn')">🔊 பாடலைக் கேட்க</button>
+      <button id="audio-viakkam-btn" onclick="speakText(BATCH_DATA.padalgal[currentIndex].eliyaViakkam, 'audio-viakkam-btn')">🔊 விளக்கத்தைக் கேட்க</button>
+    </div>
+    <div class="audio-status" id="audio-status"></div>
+  `;
+
+  document.getElementById('padal-card').scrollTop = 0;
+
+  document.getElementById('nav-count').textContent = `${currentIndex + 1} / ${total}`;
+  document.getElementById('jump-input').value = '';
+  document.getElementById('jump-input').placeholder = String(p.padalEnnum);
+  document.getElementById('btn-prev').disabled = currentIndex === 0;
+  document.getElementById('btn-next').disabled = currentIndex === total - 1;
+
+  document.querySelectorAll('.padal-dots span').forEach(dot => {
+    dot.addEventListener('click', () => renderPadal(parseInt(dot.dataset.idx, 10)));
+  });
+}
+
+// Text-to-speech: uses the browser's built-in Tamil voice when available,
+// with a graceful fallback message when it isn't (no audio files needed).
+let currentUtterance = null;
+
+function findTamilVoice() {
+  const voices = window.speechSynthesis ? window.speechSynthesis.getVoices() : [];
+  return voices.find(v => v.lang && v.lang.toLowerCase().startsWith('ta')) || null;
+}
+
+function setAudioStatus(msg) {
+  document.getElementById('audio-status').textContent = msg || '';
+}
+
+function stopSpeaking() {
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll('.audio-row button').forEach(b => b.classList.remove('speaking'));
+  currentUtterance = null;
+}
+
+function speakText(text, btnId) {
+  if (!('speechSynthesis' in window)) {
+    setAudioStatus('இந்த உலாவியில் குரல் வசதி இல்லை.');
+    return;
+  }
+
+  const btn = document.getElementById(btnId);
+  const isSpeaking = btn.classList.contains('speaking');
+  stopSpeaking();
+  if (isSpeaking) { setAudioStatus(''); return; } // acted as a stop toggle
+
+  const voice = findTamilVoice();
+  if (!voice) {
+    setAudioStatus('இந்தச் சாதனத்தில் தமிழ் குரல் கிடைக்கவில்லை. சாதன அமைப்பில் தமிழ் TTS சேர்க்கவும்.');
+    return;
+  }
+
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.voice = voice;
+  utter.lang = voice.lang;
+  utter.rate = 0.85;
+  utter.onstart = () => { btn.classList.add('speaking'); setAudioStatus('கேட்கிறது… (நிறுத்த மீண்டும் தட்டவும்)'); };
+  utter.onend = () => { btn.classList.remove('speaking'); setAudioStatus(''); };
+  utter.onerror = () => { btn.classList.remove('speaking'); setAudioStatus('குரலில் சிக்கல் ஏற்பட்டது.'); };
+  currentUtterance = utter;
+  window.speechSynthesis.speak(utter);
+}
+
+// Some browsers load voices asynchronously; re-check once they arrive.
+if ('speechSynthesis' in window) {
+  window.speechSynthesis.onvoiceschanged = () => {};
+}
+
+function jumpToPadalNumber() {
+  const input = document.getElementById('jump-input');
+  const num = parseInt(input.value, 10);
+  if (!num) return;
+
+  const idx = BATCH_DATA.padalgal.findIndex(p => p.padalEnnum === num);
+  if (idx === -1) {
+    const first = BATCH_DATA.padalgal[0].padalEnnum;
+    const last = BATCH_DATA.padalgal[BATCH_DATA.padalgal.length - 1].padalEnnum;
+    input.value = '';
+    input.placeholder = `${first}-${last} மட்டும்`;
+    return;
+  }
+  renderPadal(idx);
+}
+document.getElementById('jump-btn').addEventListener('click', jumpToPadalNumber);
+document.getElementById('jump-input').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') jumpToPadalNumber();
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowLeft') renderPadal(currentIndex - 1);
+  if (e.key === 'ArrowRight') renderPadal(currentIndex + 1);
+});
+
+// Basic swipe support
+let touchStartX = null;
+document.getElementById('padal-card').addEventListener('touchstart', (e) => {
+  touchStartX = e.changedTouches[0].screenX;
+});
+document.getElementById('padal-card').addEventListener('touchend', (e) => {
+  if (touchStartX === null) return;
+  const dx = e.changedTouches[0].screenX - touchStartX;
+  if (Math.abs(dx) > 50) {
+    if (dx < 0) renderPadal(currentIndex + 1);
+    else renderPadal(currentIndex - 1);
+  }
+  touchStartX = null;
+});
+
+const root = document.documentElement;
+document.getElementById('theme-toggle').addEventListener('click', () => {
+  const current = root.getAttribute('data-theme');
+  root.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+});
+
+let fontScale = 1;
+function applyFontScale() {
+  document.querySelectorAll('.moolam').forEach(el => el.style.fontSize = 'calc(' + (fontScale) + ' * clamp(15px, 4.3vw, 19px))');
+  document.querySelectorAll('.eliya, .paati-text').forEach(el => el.style.fontSize = (14.5 * fontScale) + 'px');
+}
+document.getElementById('font-inc').addEventListener('click', () => {
+  fontScale = Math.min(1.6, fontScale + 0.1);
+  applyFontScale();
+});
+document.getElementById('font-dec').addEventListener('click', () => {
+  fontScale = Math.max(0.8, fontScale - 0.1);
+  applyFontScale();
+});
+
+renderHeaderAndHero();
+renderTOC();
+showHomeView();
+</script>
+
+</body>
+</html>
