@@ -126,9 +126,7 @@
     border-radius: 14px;
     overflow: hidden;
     aspect-ratio: 16 / 10;
-    background:
-      linear-gradient(180deg, rgba(42,33,64,0.15), rgba(42,33,64,0.65)),
-      linear-gradient(135deg, #C99A4B, var(--indigo));
+    background: linear-gradient(135deg, #C99A4B, var(--indigo));
     display: flex;
     align-items: flex-end;
     box-shadow: 0 4px 18px rgba(42,33,64,0.18);
@@ -138,20 +136,28 @@
   .home-hero img {
     position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;
   }
+  .home-hero::before {
+    content: "";
+    position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(180deg, rgba(20,15,30,0.05) 0%, rgba(20,15,30,0.35) 45%, rgba(20,15,30,0.85) 100%);
+    pointer-events: none;
+  }
   .home-hero.no-image::after {
     content: "ஓலைச்சுவடி படம் விரைவில்";
-    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    position: absolute; inset: 0; z-index: 1; display: flex; align-items: center; justify-content: center;
     color: #fff; font-size: 13px; text-align: center; padding: 14px;
     background: rgba(42,33,64,0.3);
   }
   .home-hero-text {
-    position: relative; z-index: 1; padding: 16px;
+    position: relative; z-index: 2; padding: 16px;
     color: #FBF3DF;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.65), 0 1px 12px rgba(0,0,0,0.45);
   }
   .home-hero-text .tag {
     font-size: 12px;
-    opacity: 0.9;
+    opacity: 0.95;
     margin-bottom: 4px;
+    font-weight: 600;
   }
   .home-hero-text .line {
     font-size: 14px;
